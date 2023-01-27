@@ -10,6 +10,8 @@ module.exports = {
         allowNull: false,
       },
       home_team_id: {
+        foreignKey: true,
+
         type: Sequelize.INTEGER,
         allowNull: false,
       },
@@ -18,6 +20,7 @@ module.exports = {
         allowNull: false,
       },
       away_team_id: {
+        foreignKey: true,
         type: Sequelize.INTEGER,
         allowNull: false,
       },
