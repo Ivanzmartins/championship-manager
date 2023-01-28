@@ -1,5 +1,6 @@
 import * as bcrypt from 'bcryptjs';
-import { createToken } from '../auth/jwt';
+import { JwtPayload } from 'jsonwebtoken';// jwtpayload is an interface from jsonwebtoken that has a data property
+import { createToken, validateToken } from '../auth/jwt';
 import User from '../database/models/userModel';
 
 class UserService {
@@ -22,6 +23,14 @@ class UserService {
     const { password: _, ...rest } = dataValues;
     const token = createToken(rest);
     return { type: 200, message: token };
+  }
+
+  static async validate(token: string) {
+    const valid = validateToken(token) as JwtPayload;
+    if (!valid) {
+      return { type: 'error', message: 'invalid token' };
+    }
+    return { type: null, message: valid.role };
   }
 }
 export default UserService;

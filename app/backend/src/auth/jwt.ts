@@ -1,5 +1,8 @@
 import { SignOptions } from 'jsonwebtoken';
 import * as jwt from 'jsonwebtoken';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 type TypeToken = {
   id?: string,
@@ -8,7 +11,7 @@ type TypeToken = {
   level: number,
 };
 
-const secret = process.env.JWT || 'secret';
+const secret = process.env.JWT_SECRET || 'jwt_secret';
 
 const jwtConfig: SignOptions = {
   expiresIn: '1d',
@@ -19,8 +22,10 @@ export const createToken = (payload: TypeToken) => jwt.sign(payload, secret, jwt
 
 export const validateToken = (token: string) => {
   try {
-    return jwt.verify(token, secret);
-  } catch {
-    return false;
+    const decoded = jwt.verify(token, secret);
+
+    return decoded;
+  } catch (err) {
+    return null;
   }
 };
