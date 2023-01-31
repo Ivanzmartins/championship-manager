@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcryptjs';
-import { JwtPayload } from 'jsonwebtoken';// jwtpayload is an interface from jsonwebtoken that has a data property
+import { JwtPayload } from 'jsonwebtoken';
 import { createToken, validateToken } from '../auth/jwt';
 import User from '../database/models/userModel';
 
