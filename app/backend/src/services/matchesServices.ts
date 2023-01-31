@@ -44,12 +44,22 @@ export default class MatchesService {
   }
 
   public static async createMatch(matchInfos: IMatch) {
+    const { homeTeamId, awayTeamId } = matchInfos;
+    if (homeTeamId === awayTeamId) {
+      return { message: 'It is not possible to create a match with two equal teams', type: 422 };
+    }
+    const homeTeam = await Team.findByPk(homeTeamId);
+    const awayTeam = await Team.findByPk(awayTeamId);
+    if (!homeTeam || !awayTeam) {
+      return { message: 'There is no team with such id!', type: 404 };
+    }
     const match = await Match.create({ inProgress: true, ...matchInfos });
-    return match;
+    return { newMatch: match, type: 201 };
   }
 
+  // changes the inProgress attribute to false of the match with the given id
   public static async updateMatch(id: string) {
-    Match.update({ inProgress: false }, { where: { id } });
+    Match.update({ inProgress: 'false' }, { where: { id } });
     return { message: 'Finished' };
   }
 }
