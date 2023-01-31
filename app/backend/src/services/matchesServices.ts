@@ -1,3 +1,4 @@
+import IMatch from '../Interfaces/MatchType';
 import Match from '../database/models/matchesModel';
 import Team from '../database/models/teamsModel';
 
@@ -8,7 +9,6 @@ export default class MatchesService {
     this.model = new Match();
   }
 
-  // GET all matches and the away team name
   public static async getAllMatches() {
     const matches = await Match.findAll({
       include: [
@@ -18,8 +18,6 @@ export default class MatchesService {
     });
     return matches;
   }
-
-  // GET all matches and the away team name of matches in progress
 
   public static async getMatchesInProgress() {
     const matches = await Match.findAll({
@@ -43,5 +41,15 @@ export default class MatchesService {
     });
 
     return matches;
+  }
+
+  public static async createMatch(matchInfos: IMatch) {
+    const match = await Match.create({ inProgress: true, ...matchInfos });
+    return match;
+  }
+
+  public static async updateMatch(id: string) {
+    Match.update({ inProgress: false }, { where: { id } });
+    return { message: 'Finished' };
   }
 }
