@@ -33,9 +33,23 @@ export default class MatchesController {
     return res.status(201).json(newMatch);
   }
 
+  public static async finishMatch(req: Request, res: Response) {
+    const { id } = req.params;
+    const { message } = await MatchesService.finishMatch(id);
+    return res.status(200).json({ message });
+  }
+
   public static async updateMatch(req: Request, res: Response) {
     const { id } = req.params;
-    const { message } = await MatchesService.updateMatch(id);
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    const { message } = await MatchesService.updateMatch(id, homeTeamGoals, awayTeamGoals);
     return res.status(200).json({ message });
+  }
+
+  public static async getMatchById(req: Request, res: Response) {
+    const { id } = req.params;
+    const match = await MatchesService.getMatchById(id);
+    if (!match) return res.status(404).json({ message: 'There is no match with such id!' });
+    return res.status(200).json(match);
   }
 }

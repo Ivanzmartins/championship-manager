@@ -58,8 +58,19 @@ export default class MatchesService {
   }
 
   // changes the inProgress attribute to false of the match with the given id
-  public static async updateMatch(id: string) {
+  public static async finishMatch(id: string) {
     Match.update({ inProgress: 'false' }, { where: { id } });
     return { message: 'Finished' };
+  }
+
+  static async updateMatch(id: string, homeTeamGoals: number, awayTeamGoals: number) {
+    const [teste] = await Match.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+    if (teste === 0) return { message: 'There is no match with such id!' };
+    return { message: 'Updated' };
+  }
+
+  public static async getMatchById(id: string) {
+    const match = await Match.findByPk(id);
+    return match;
   }
 }

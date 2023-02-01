@@ -8,6 +8,10 @@ matchesRouter.get('/', MatchesController.getMatches);
 
 matchesRouter.post('/', tokenMiddleware, MatchesController.createMatch);
 
-matchesRouter.patch('/:id/finish', MatchesController.updateMatch);
+matchesRouter.patch('/:id/finish', MatchesController.finishMatch);
+
+matchesRouter.patch('/:id/', MatchesController.updateMatch);
+
+matchesRouter.get('/:id', MatchesController.getMatchById);
 
 export default matchesRouter;
