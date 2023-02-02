@@ -38,9 +38,10 @@ export default class MatchesService {
         { model: Team, as: 'awayTeam', attributes: { exclude: ['id'] } },
         { model: Team, as: 'homeTeam', attributes: { exclude: ['id'] } },
       ],
-    });
+    }) as unknown as IStatMatch[];
 
-    return matches as unknown as IStatMatch[];
+    return matches;
+    // .matches as unknown as IStatMatch[];
   }
 
   public static async createMatch(matchInfos: IMatch) {
