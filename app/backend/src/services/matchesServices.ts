@@ -72,9 +72,4 @@ export default class MatchesService {
     const match = await Match.findByPk(id);
     return match;
   }
-
-  public static async getMatchFinished() {
-    const partidas = await Match.findAll();
-    return partidas as unknown as IStatMatch[];
-  }
 }
