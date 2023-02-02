@@ -1,4 +1,4 @@
-import IMatch from '../Interfaces/MatchType';
+import IMatch, { IStatMatch } from '../Interfaces/MatchType';
 import Match from '../database/models/matchesModel';
 import Team from '../database/models/teamsModel';
 
@@ -31,7 +31,7 @@ export default class MatchesService {
     return matches;
   }
 
-  public static async getMatchesFinished() {
+  public static async getMatchesFinished(): Promise<IStatMatch[]> {
     const matches = await Match.findAll({
       where: { inProgress: false },
       include: [
@@ -40,7 +40,7 @@ export default class MatchesService {
       ],
     });
 
-    return matches;
+    return matches as unknown as IStatMatch[];
   }
 
   public static async createMatch(matchInfos: IMatch) {
@@ -57,7 +57,6 @@ export default class MatchesService {
     return { newMatch: match, type: 201 };
   }
 
-  // changes the inProgress attribute to false of the match with the given id
   public static async finishMatch(id: string) {
     Match.update({ inProgress: 'false' }, { where: { id } });
     return { message: 'Finished' };
@@ -72,5 +71,10 @@ export default class MatchesService {
   public static async getMatchById(id: string) {
     const match = await Match.findByPk(id);
     return match;
+  }
+
+  public static async getMatchFinished() {
+    const partidas = await Match.findAll();
+    return partidas as unknown as IStatMatch[];
   }
 }
