@@ -21,6 +21,7 @@ This project is a match and team management system. It allows for user login, li
   npm run test
 # To run the tests created:
   cd ./app/backend/ && npm run test:coverage
+  ```
 
 
 ## Models
