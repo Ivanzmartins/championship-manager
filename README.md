@@ -3,6 +3,26 @@
 ## Introduction
 This project is a match and team management system. It allows for user login, listing of teams and matches, adding matches, updating match status, and checking the leaderboard.
 
+##Instructions:
+```bash
+# Clone the repository
+  git clone git@github.com:Ivanzmartins/trybe-futebol-clube.git
+# Enter the repository folder you just cloned:
+  cd trybe-futebol-clube
+# Enter the backend part of the project
+  cd ./app/backend
+# Install dependencies and initialize the project
+  npm install
+# Enter Vs Code to check the files using the terminal shortcut:
+  code .
+# To start the project, run the command:
+  docker compose up -d
+# To run the tests use the terminal shortcut:
+  npm run test
+# To run the tests created:
+  cd ./app/backend/ && npm run test:coverage
+
+
 ## Models
 Three models have been created:
 - Matches
