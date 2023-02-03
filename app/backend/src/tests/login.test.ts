@@ -32,10 +32,6 @@ describe("Testes da rota /login", () => {
       .request(app)
       .get('/login/validate')
       .set('Authorization', `Bearer ${token}`);
-      console.log(httpRes.body);
-      
-      // expect(httpRes.status).to.be.equal(200);
-      // expect(httpRes.body).to.have.property('role');
     })
   });
 });
