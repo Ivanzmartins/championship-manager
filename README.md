@@ -3,7 +3,7 @@
 ## Introduction
 This project is a match and team management system. It allows for user login, listing of teams and matches, adding matches, updating match status, and checking the leaderboard.
 
-##Instructions:
+## Instructions:
 ```bash
 # Clone the repository
   git clone git@github.com:Ivanzmartins/trybe-futebol-clube.git
