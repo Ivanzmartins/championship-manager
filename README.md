@@ -2,6 +2,7 @@
 
 ## Introduction
 This project is a match and team management system. It allows for user login, listing of teams and matches, adding matches, updating match status, and checking the leaderboard.
+The front-end was provided by Trybe and only the back-end was developed by me.
 
 ## Instructions:
 ```bash
